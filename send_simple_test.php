@@ -6,13 +6,19 @@ require_once("phpmailer/class.phpmailer.php");
 	$mail->IsSMTP();
 	$mail->SMTPAuth = true;
 	//---coozmail.com.tw
-	//$mail->Host = "smail.longeplay.com.tw";
+	
+/*
     $mail->Host = "edm.cooz.com.tw";
 	$mail->Port = 25;
 	$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
-    //$mail->Password = "";
-    //$mail->Username = "LongE_SDKSite@smail.longeplay.com.tw"; 
-	//$mail->Password = "54700022";
+    $mail->Password = "";
+  
+  */
+///*
+    $mail->Host = "smail.longeplay.com.tw";
+    $mail->Port = 25;
+    $mail->Username = "LongE_SDKSite@smail.longeplay.com.tw"; 
+	$mail->Password = "54700022";  //*/
 
 	$mail->CharSet="utf-8";
 	$mail->Encoding = "base64";
