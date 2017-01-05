@@ -1,4 +1,9 @@
 <?PHP
+
+error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+
 include "./lib/connect_mysql_local.php";
 include "login.php";
 $sql_TOT = "Select count(*) From EDMUser";
