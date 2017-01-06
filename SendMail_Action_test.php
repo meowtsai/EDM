@@ -28,19 +28,19 @@ if ($CheckCount > 0){
 	$mail = new PHPMailer();
 	//設定使用SMTP發送
 	$mail->IsSMTP();
-	$mail->SMTPAuth = true;
+	$mail->SMTPAuth =false;
 	//---coozmail.com.tw
 	//$mail->Host = "smail.longeplay.com.tw";
     $mail->Host = "edm.cooz.com.tw";
 	$mail->Port = 25;
-	$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
-	$mail->Password = "";
+	//$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
+	//$mail->Password = "";
 	$mail->CharSet="utf-8";
 	$mail->Encoding = "base64";
 	$mail->IsHTML(true);
 	$mail->WordWrap = 50;
 	
-	$sqlMail ="select A.ACMNo, A.html, A.FormMail, A.Tital, A.SendUser, A.AddFile, B.MailNo, B.EMail, B.UserName, B.Status "; 
+	$sqlMail ="select A.ACMNo, A.html, A.FormMail, A.Tital, A.SendUser, A.AddFile, B.MailNo, B.EMail, B.UserName, B.Status, B.gift_code "; 
 	$sqlMail .="from EDM.ActionMail A, EDM.SendMail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
 	$sqlMail .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) order by A.ACMNo, B.MailNo limit 0, $MailLimit";
 	$result_MailList = mysqli_query($Conn_local,$sqlMail);
@@ -60,7 +60,7 @@ if ($CheckCount > 0){
 		//確認工作是否有重複
 		$sql_check = "Select tag, Status from EDM.SendMail where MailNo = '".$row["MailNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 		$result = mysqli_query($Conn_local,$sql_check);
-        echo "確認工作是否有重複".$sql_check."<br>";
+        //echo "確認工作是否有重複".$sql_check."<br>";
 		List($Mail_tag, $Mail_Status)=mysqli_fetch_row($result);
 		echo "$Mail_tag - $Mail_Status (".$row["ACMNo"].") \n";
 		if ($Mail_Status == "w" && $Mail_tag == "0"){
@@ -84,7 +84,18 @@ if ($CheckCount > 0){
 			$User_Email = $row["EMail"];
 			$mail->AddAddress($User_Email,$user_name);
 			$mail->Subject=$row["Tital"];
-			$mail->Body=$row["html"];
+            $gift_code="";
+            $unsubmessage="<p><a href='http://edm.cooz.com.tw/cancelsubscribe.php?acmno=$ACMNo&mail=$User_Email'>我不願意再收到活動訊息郵件/ unsubscribe</a></p>";
+            $mailBody=$row["html"];
+            if (isset($row["gift_code"]))
+            {
+                $gift_code= $row["gift_code"];
+                $mailBody = str_replace("TheCakeIsALie",$gift_code, $mailBody, $count);
+            }
+            
+            
+            
+			$mail->Body=$mailBody.$unsubmessage; 
 			if(!$mail->Send()){
 			//SendMaill Error Update DB
 				$Update_Status = "Update EDM.SendMail Set Status = 'e1', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";

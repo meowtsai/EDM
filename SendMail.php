@@ -72,23 +72,58 @@ if ($EMail_Command == 1){
 	$SendMailTo = "@".$DNSMail."會員";
 }else if($EMail_Command == 4){
     //新增可以匯入有兩個欄位的excel，第一行是email,第二行是序號
-    
-    $file = fopen($filename, "r");
-    //$sql_data = "SELECT * FROM prod_list_1 ";
+    //UploadExcel
+    if (!empty($_FILES["UploadExcel"]["name"])){
+		$EXCEL_File_name = $_FILES["UploadExcel"]["name"];
+		$EXCEL_File_Size = $_FILES["UploadExcel"]["size"];
+		$EXCEL_File_type = $_FILES["UploadExcel"]["type"];
+		$EXCEL_File_tmp_name = $_FILES["UploadExcel"]["tmp_name"];
+        $pos = strpos($EXCEL_File_type, "excel");
+        if ($pos == false)
+        {
+            die("不正確的檔案格式");
+            
+        }
+        
+		move_uploaded_file($EXCEL_File_tmp_name,"./Excel/".$EXCEL_File_name);
+        
+        
+        
+        //echo $EXCEL_File_name . "<br />";
+        //echo $EXCEL_File_Size . "<br />";
+        //echo $EXCEL_File_type . "<br />";
+        //echo $EXCEL_File_tmp_name . "<br />";
+        
+        
+        $file=fopen("./Excel/$EXCEL_File_name","r");
+		$count = 0;    
+        //echo $sql."<br />";// add this line
+        while (($emapData = fgetcsv($file, 300, ",")) !== FALSE)
+        {
+            //print_r($emapData);
+            //exit();
+            
+            //echo $count."<br />";// add this line
 
-    $count = 0;                                         // add this line
-    while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
-    {
-        //print_r($emapData);
-        //exit();
-        $count++;                                      // add this line
-
-        if($count>1){                                  // add this line
-          $sql = "INSERT into prod_list_1(p_bench,p_name,p_price,p_reason) values ('$emapData[0]','$emapData[1]','$emapData[2]','$emapData[3]')";
-          mysql_query($sql);
-        }                                              // add this line
+            if ($count!=0)
+            {
+                $user_email=$emapData[0];
+                $user_code=$emapData[1];
+                
+              $sql = "INSERT into user_code(email_address,gift_code) values ('$user_email','$user_code')";
+                //echo $sql."<br />";
+              mysqli_query($Conn_local,$sql);
+              //echo $user_email."--".$user_code. "<br />";
+             }   
+                
+            $count++;                                      // add this line// add this line
+        }
+        $count--;
+        echo  "新增".$count."筆<br />";
+    $MailSql = "Select email_address,gift_code From user_code";
+	$CountMail = "Select count(distinct email_address) From user_code";
+	$SendMailTo = "自行上傳名單的會員";
     }
-    
     
 }
 $result = mysqli_query($Conn_local,$CountMail);

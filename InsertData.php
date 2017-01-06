@@ -46,8 +46,14 @@ while($row = mysqli_fetch_array($result_cooz)){
 	List($CheckCount)=mysqli_fetch_row($result_check);
 
 	if ($CheckCount == 0){
-		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName)values";
-		$insert_Mail .= "('".$row["email_address"]."','a',0,'$ACMNo','')";
+		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
+        $pos = strpos($sql, "gift_code");
+        $gift_code="";
+        if ($pos !== false)
+        {
+            $gift_code= $row["gift_code"];
+        }
+		$insert_Mail .= "('".$row["email_address"]."','a',0,'$ACMNo','','$gift_code')";
 		$result_Mail = mysqli_query($Conn_local,$insert_Mail);
 		$i++;
 	}
@@ -55,8 +61,8 @@ while($row = mysqli_fetch_array($result_cooz)){
 }
 for ($x=0;$x <= 3;$x++){
 	if (!empty($Mail[$x])){
-		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName)values";
-		$insert_Mail .= "('".$Mail[$x]."','a','','$ACMNo','TestMail')";
+		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
+		$insert_Mail .= "('".$Mail[$x]."','a','','$ACMNo','TestMail','TESTGIFTCODEAAAAA')";
 		$result = mysqli_query($Conn_local,$insert_Mail);
 		$i++;
 		$j++;
