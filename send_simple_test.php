@@ -8,7 +8,7 @@ require_once("phpmailer/class.phpmailer.php");
 	//---coozmail.com.tw
 	
 ///*
-    $mail->Host = "edm.cooz.com.tw";
+    $mail->Host = "27.147.16.103";
 	$mail->Port = 25;
 	//$mail->Username = "123@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
     //$mail->Password = "";
