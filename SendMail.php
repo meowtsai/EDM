@@ -1,4 +1,8 @@
 <?PHP
+
+error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
 //--Kenny 2013.1.29 EDM 2
 //--SendMail.php
 //include "./lib/connect_mysql.php";

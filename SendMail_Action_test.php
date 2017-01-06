@@ -1,4 +1,7 @@
 <?PHP
+error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
 //--Kenny 2014.7.17 EDM SendMail(Status = w)
 //SendMail_Action.php
 date_default_timezone_set('Asia/Taipei');
