@@ -98,6 +98,9 @@ if ($EMail_Command == 1){
         //echo $EXCEL_File_type . "<br />";
         //echo $EXCEL_File_tmp_name . "<br />";
         
+        $sql = "delete from user_code";  
+                //echo $sql."<br />";
+        mysqli_query($Conn_local,$sql);
         
         $file=fopen("./Excel/$EXCEL_File_name","r");
 		$count = 0;    
