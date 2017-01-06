@@ -17,7 +17,7 @@ fwrite($Sys_log, "Before Action Time".$NowDate);
 fclose($Sys_log);
 
 //確認是否有未發出的信件
-$sqlMail_Check ="select count(*) from EDM.ActionMail A, EDM.SendMail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
+$sqlMail_Check ="select count(*) from EDM.actionmail A, EDM.sendmail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
 $sqlMail_Check .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) order by A.ACMNo, B.MailNo";
 $result_check = mysqli_query($Conn_local,$sqlMail_Check);
 List($CheckCount)=mysqli_fetch_row($result_check);
@@ -31,7 +31,9 @@ if ($CheckCount > 0){
 	$mail->SMTPAuth =false;
 	//---coozmail.com.tw
 	//$mail->Host = "smail.longeplay.com.tw";
-    $mail->Host = "edm.cooz.com.tw";
+    //$mail->Host = "edm.cooz.com.tw";
+    $mail->Host = "27.147.16.103";
+    
 	$mail->Port = 25;
 	//$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
 	//$mail->Password = "";
@@ -41,7 +43,7 @@ if ($CheckCount > 0){
 	$mail->WordWrap = 50;
 	
 	$sqlMail ="select A.ACMNo, A.html, A.FormMail, A.Tital, A.SendUser, A.AddFile, B.MailNo, B.EMail, B.UserName, B.Status, B.gift_code "; 
-	$sqlMail .="from EDM.ActionMail A, EDM.SendMail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
+	$sqlMail .="from EDM.actionmail A, EDM.sendmail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
 	$sqlMail .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) order by A.ACMNo, B.MailNo limit 0, $MailLimit";
 	$result_MailList = mysqli_query($Conn_local,$sqlMail);
     //echo $sqlMail."<br>";
@@ -51,20 +53,20 @@ if ($CheckCount > 0){
 		//變更寄件工作狀態
 		if ($ACMNo != $row["ACMNo"]){
 			$ACMNo = $row["ACMNo"];
-			$Update_ACStatus = "Update EDM.ActionMail Set Status = 'a' where ACMNo = '".$row["ACMNo"]."'";
+			$Update_ACStatus = "Update EDM.actionmail Set Status = 'a' where ACMNo = '".$row["ACMNo"]."'";
 			$result_ACStatus = mysqli_query($Conn_local,$Update_ACStatus);
             echo $Update_ACStatus."<br>";
 			$ActionNo[$i] = $ACMNo;
 			$i++;
 		}
 		//確認工作是否有重複
-		$sql_check = "Select tag, Status from EDM.SendMail where MailNo = '".$row["MailNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
+		$sql_check = "Select tag, Status from EDM.sendmail where MailNo = '".$row["MailNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 		$result = mysqli_query($Conn_local,$sql_check);
         //echo "確認工作是否有重複".$sql_check."<br>";
 		List($Mail_tag, $Mail_Status)=mysqli_fetch_row($result);
 		echo "$Mail_tag - $Mail_Status (".$row["ACMNo"].") \n";
 		if ($Mail_Status == "w" && $Mail_tag == "0"){
-			$Update_Tag = "Update EDM.SendMail Set tag='1' where '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
+			$Update_Tag = "Update EDM.sendmail Set tag='1' where '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 			echo $Update_Tag;
 			$result_UPTag = mysqli_query($Conn_local,$Update_Tag);
 			//寄件人名稱
@@ -98,7 +100,7 @@ if ($CheckCount > 0){
 			$mail->Body=$mailBody.$unsubmessage; 
 			if(!$mail->Send()){
 			//SendMaill Error Update DB
-				$Update_Status = "Update EDM.SendMail Set Status = 'e1', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
+				$Update_Status = "Update EDM.sendmail Set Status = 'e1', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 			}else{
 			//SendMail Success Update DB
 				$Update_Status = "Update EDM.SendMail Set Status = 's' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
@@ -110,7 +112,7 @@ if ($CheckCount > 0){
 	if ($i > 0){
 		while(!empty($ActionNo[$j])){
 			//變更工作中信件完成與失敗數量
-			$sql_action = "Select status, count(Status) as Scount From EDM.SendMail where ActionNO = '$ActionNo[$j]' group by Status";
+			$sql_action = "Select status, count(Status) as Scount From EDM.sendmail where ActionNO = '$ActionNo[$j]' group by Status";
 			$result_Action = mysqli_query($Conn_local,$sql_action);
 			$E_Tot=0;
 			$E1_Tot=0;
@@ -136,12 +138,12 @@ if ($CheckCount > 0){
 			$TOT = $W_Tot + $E1_Tot + $E2_Tot;
 			//echo "TOT : $TOT <br>";
 			if ($TOT == 0){
-				$Update_ActionMail = "Update EDM.ActionMail Set Status = 'f', SuccessMail = '$S_Tot', ErrorMail = '$E_Tot', WaitMail = '$W_Tot' where ACMNo = '".$ActionNo[$j]."'";
+				$Update_actionmail = "Update EDM.actionmail Set Status = 'f', SuccessMail = '$S_Tot', ErrorMail = '$E_Tot', WaitMail = '$W_Tot' where ACMNo = '".$ActionNo[$j]."'";
 			}else{
-				$Update_ActionMail = "Update EDM.ActionMail Set SuccessMail = '$S_Tot', ErrorMail = '$E_Tot', WaitMail = '$W_Tot' where ACMNo = '".$ActionNo[$j]."'";
+				$Update_actionmail = "Update EDM.actionmail Set SuccessMail = '$S_Tot', ErrorMail = '$E_Tot', WaitMail = '$W_Tot' where ACMNo = '".$ActionNo[$j]."'";
 			}
-			//echo "$Update_ActionMail <br>";
-			$result_UPActionMail = mysqli_query($Conn_local,$Update_ActionMail);
+			//echo "$Update_actionmail <br>";
+			$result_UPactionmail = mysqli_query($Conn_local,$Update_actionmail);
 			$j++;
 		}
 	}

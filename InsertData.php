@@ -24,7 +24,7 @@ if ($TotMail <= 0 & $Mail[1] == "" & $Mail[2] == "" & $Mail[3] == "" ){
 }
 
 //取得最大的寄件行動流水號
-$sql_Max = "select Max(ACMNo) from EDM.ActionMail";
+$sql_Max = "select Max(ACMNo) from EDM.actionmail";
 $result = mysqli_query($Conn_local,$sql_Max);
 List($ACMNo_Max)=mysqli_fetch_row($result);
 if ($ACMNo_Max > 0 && !empty($ACMNo_Max)){
@@ -33,7 +33,7 @@ if ($ACMNo_Max > 0 && !empty($ACMNo_Max)){
 	$ACMNo = 1;
 }
 
-$InsertData = "insert into EDM.ActionMail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status,Create_date,html,FormMail,Tital,SendUser,AddFile)values";
+$InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status,Create_date,html,FormMail,Tital,SendUser,AddFile)values";
 $InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender','".$_POST['AddFile']."')";
 $result = mysqli_query($Conn_local,$InsertData);
 
@@ -41,12 +41,12 @@ $result_cooz = mysqli_query($Conn_local,$sql);
 $i = 0;
 $j = 0;
 while($row = mysqli_fetch_array($result_cooz)){
-	$sql_mail_check = "select count(*) from EDM.ErrorMail where EMail = '".$row["email_address"]."'";
+	$sql_mail_check = "select count(*) from EDM.errormail where EMail = '".$row["email_address"]."'";
 	$result_check = mysqli_query($Conn_local,$sql_mail_check);
 	List($CheckCount)=mysqli_fetch_row($result_check);
 
 	if ($CheckCount == 0){
-		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
+		$insert_Mail = "insert into sendmail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
         $pos = strpos($sql, "gift_code");
         $gift_code="";
         if ($pos !== false)
@@ -61,7 +61,7 @@ while($row = mysqli_fetch_array($result_cooz)){
 }
 for ($x=0;$x <= 3;$x++){
 	if (!empty($Mail[$x])){
-		$insert_Mail = "insert into SendMail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
+		$insert_Mail = "insert into sendmail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
 		$insert_Mail .= "('".$Mail[$x]."','a','','$ACMNo','TestMail','TESTGIFTCODEAAAAA')";
 		$result = mysqli_query($Conn_local,$insert_Mail);
 		$i++;
@@ -69,9 +69,9 @@ for ($x=0;$x <= 3;$x++){
 	}
 }
 $Tot_ErrorMail = $j - $i;
-$Update_Status = "Update EDM.SendMail set Status = 'w' where ActionNo = '$ACMNo'";
+$Update_Status = "Update EDM.sendmail set Status = 'w' where ActionNo = '$ACMNo'";
 $result_Status = mysqli_query($Conn_local,$Update_Status);
-$Update_ACMNo = "Update EDM.ActionMail set WaitMail = '$i' where ACMNo = '$ACMNo'";
+$Update_ACMNo = "Update EDM.actionmail set WaitMail = '$i' where ACMNo = '$ACMNo'";
 $result_ACMNo = mysqli_query($Conn_local,$Update_ACMNo);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

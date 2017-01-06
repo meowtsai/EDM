@@ -5,18 +5,18 @@
 include "./lib/connect_mysql_local.php";
 include "login.php";
 if($_SESSION['EDM_User'] == "kenny"){
-	$sql_count = "SELECT count(*) FROM EDM.ActionMail ";
-	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.ActionMail Order by Create_date";
+	$sql_count = "SELECT count(*) FROM EDM.actionmail ";
+	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.actionmail Order by Create_date";
 }else{
-	$sql_count = "SELECT count(*) FROM EDM.ActionMail where OwnUser='".$_SESSION['EDM_User']."'";
-	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.ActionMail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
+	$sql_count = "SELECT count(*) FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."'";
+	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
 }
 $result = mysqli_query($Conn_local,$sql_count);
 List($Action_count)=mysqli_fetch_row($result);
 
 //變更寄送狀態
 if (!empty($_GET["Action"]) && !empty($_GET["ACMNo"])){
-	$UpdateAction = "Update EDM.ActionMail Set Status='".$_GET["Action"]."' where ACMNo='".$_GET["ACMNo"]."' and OwnUser='".$_SESSION['EDM_User']."'";
+	$UpdateAction = "Update EDM.actionmail Set Status='".$_GET["Action"]."' where ACMNo='".$_GET["ACMNo"]."' and OwnUser='".$_SESSION['EDM_User']."'";
 	$result_UPA = mysqli_query($Conn_local,$UpdateAction);
 }
 
