@@ -8,7 +8,7 @@ if ($ip!='203.73.59.138' && $ip!='::1')
     //echo $_SERVER['REMOTE_ADDR'];
     //echo $_SERVER['REMOTE_ADDR']!='::1';
     //echo '<html><head><meta http-equiv="refresh" content="0;URL=index.php"><title>Redirect</title></head><body  bgcolor="#C5E4E9" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"></body></html>';				
-    //echo '不合法ip' .($_SERVER['REMOTE_ADDR']!='::1');
+    echo '不合法ip' .($_SERVER['REMOTE_ADDR']!='::1');
 			exit();
     
 
@@ -16,7 +16,7 @@ if ($ip!='203.73.59.138' && $ip!='::1')
 }
 else
 {
-    //echo $_SERVER['REMOTE_ADDR'];
+    echo $_SERVER['REMOTE_ADDR'];
     
 }
 
