@@ -4,21 +4,21 @@ require_once("phpmailer/class.phpmailer.php");
 	$mail = new PHPMailer();
 	//設定使用SMTP發送
 	$mail->IsSMTP();
-	$mail->SMTPAuth = true;
+	$mail->SMTPAuth = false;
 	//---coozmail.com.tw
 	
-/*
+///*
     $mail->Host = "27.147.16.103";
 	$mail->Port = 25;
 	//$mail->Username = "123@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
     //$mail->Password = "";
   
-  */
-///*
+  //*/
+/*
     $mail->Host = "smail.longeplay.com.tw";
     $mail->Port = 25;
     $mail->Username = "LongE_SDKSite@smail.longeplay.com.tw"; 
-	$mail->Password = "54700022";  //*/
+	$mail->Password = "54700022";  */
 
 	$mail->CharSet="utf-8";
 	$mail->Encoding = "base64";
