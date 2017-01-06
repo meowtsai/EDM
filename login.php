@@ -39,9 +39,9 @@ if (empty($_SESSION['EDM_User']) || $_SESSION['login_AUTH'] != 9){
 			List($UserName)=mysqli_fetch_row($result_User);
 			$_SESSION['UserName'] = $UserName;
 		}else{
-            //echo $sql_User;
-			echo "<script>alert('注意!!你的帳號或密碼有誤');</script>";
-			echo '<html><head><meta http-equiv="refresh" content="0;URL=index.php"><title>Redirect</title></head><body  bgcolor="#C5E4E9" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"></body></html>';				
+            echo $sql_User;
+			//echo "<script>alert('注意!!你的帳號或密碼有誤');</script>";
+			//echo '<html><head><meta http-equiv="refresh" content="0;URL=index.php"><title>Redirect</title></head><body  bgcolor="#C5E4E9" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"></body></html>';				
 			exit();
 		}
 	}else{
