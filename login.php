@@ -27,14 +27,14 @@ if (empty($_SESSION['EDM_User']) || $_SESSION['login_AUTH'] != 9){
 	@$password = $_POST['passwd'];
 	
 	if (!empty($account) && !empty($password)){
-		$sql = "select count(*) from edm.edmuser where UserId='$account' and UserPW='$password'";
+		$sql = "select count(*) from EDM.edmuser where UserId='$account' and UserPW='$password'";
 		$result = mysqli_query($Conn_local,$sql);
 		List($Auth_count)=mysqli_fetch_row($result);
 		if ($Auth_count > 0){
 			//登入成功
 			$_SESSION['EDM_User'] = $account;
 			$_SESSION['login_AUTH'] = 9;
-			$sql_User = "select UserName from edm.edmuser where UserId='$account' and UserPW='$password'";
+			$sql_User = "select UserName from EDM.edmuser where UserId='$account' and UserPW='$password'";
 			$result_User = mysqli_query($Conn_local,$sql_User);
 			List($UserName)=mysqli_fetch_row($result_User);
 			$_SESSION['UserName'] = $UserName;
