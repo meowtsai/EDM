@@ -1,10 +1,15 @@
 <?PHP
+
+error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+
 //--Kenny 2013.1.29 EDM 1
 //--EDM.php
 //include "./lib/connect_mysql.php";
 include "./lib/connect_mysql_local.php";
 include "login.php";
-if($_SESSION['EDM_User'] == "kenny"){
+if($_SESSION['EDM_User'] == "meow"){
 	$sql_count = "SELECT count(*) FROM EDM.actionmail ";
 	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.actionmail Order by Create_date";
 }else{
