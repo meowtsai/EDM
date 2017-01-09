@@ -15,6 +15,7 @@ require_once("phpmailer/class.phpmailer.php");
 ///*
     $mail->Host = "27.147.16.103";
 	$mail->Port = 25;
+    //$mail->SMTPDebug = 2; 如果要更詳細的錯誤就要下這個指令
 	//$mail->Username = "123@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
     //$mail->Password = "";
   
