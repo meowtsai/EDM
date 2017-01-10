@@ -13,7 +13,7 @@ ini_set( "memory_limit", "128M" );
 $MailLimit = 300;
 
 //上次執行時間紀錄
-$Action_log = "logs/SystemAction.log";
+$Action_log = "/var/www/html/EDM/logs/SystemAction.log";
 $Sys_log = fopen("$Action_log",'w');
 $NowDate = date("Y-m-d H:i:s");
 fwrite($Sys_log, "Before Action Time".$NowDate);
