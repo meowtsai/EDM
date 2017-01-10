@@ -40,7 +40,7 @@ if ($ACMNo_Max > 0 && !empty($ACMNo_Max)){
 $InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status,Create_date,html,FormMail,Tital,SendUser,AddFile)values";
 $InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender','".$_POST['AddFile']."')";
 $result = mysqli_query($Conn_local,$InsertData);
-echo $InsertData;
+//echo $InsertData;
 
 $result_cooz = mysqli_query($Conn_local,$sql);
 $i = 0;

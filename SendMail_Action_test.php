@@ -36,7 +36,7 @@ if ($CheckCount > 0){
 	//---coozmail.com.tw
 	//$mail->Host = "smail.longeplay.com.tw";
     //$mail->Host = "edm.cooz.com.tw";
-    $mail->Host = "27.147.16.103";
+    $mail->Host = "edm.cooz.com.tw";
     
 	$mail->Port = 25;
 	//$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
@@ -91,7 +91,7 @@ if ($CheckCount > 0){
 			$mail->AddAddress($User_Email,$user_name);
 			$mail->Subject=$row["Tital"];
             $gift_code="";
-            $unsubmessage="<p><a href='http://edm.cooz.com.tw/cancelsubscribe.php?acmno=$ACMNo&mail=$User_Email'>我不願意再收到活動訊息郵件/ unsubscribe</a></p>";
+            $unsubmessage="<p><a href='http://edm.cooz.com.tw/EDM/cancelsubscribe.php?acmno=$ACMNo&mail=$User_Email'>我不願意再收到活動訊息郵件/ unsubscribe</a></p>";
             $mailBody=$row["html"];
             if (isset($row["gift_code"]))
             {
