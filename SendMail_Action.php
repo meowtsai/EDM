@@ -69,7 +69,7 @@ if ($CheckCount > 0){
 		List($Mail_tag, $Mail_Status)=mysqli_fetch_row($result);
 		echo "$Mail_tag - $Mail_Status (".$row["ACMNo"].") \n";
 		if ($Mail_Status == "w" && $Mail_tag == "0"){
-			$Update_Tag = "Update EDM.sendmail Set tag='1' where '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
+			$Update_Tag = "Update EDM.sendmail Set tag='1' where MailNo='".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 			//echo $Update_Tag;
 			$result_UPTag = mysqli_query($Conn_local,$Update_Tag);
 			//寄件人名稱
@@ -108,6 +108,7 @@ if ($CheckCount > 0){
 			//SendMail Success Update DB
 				$Update_Status = "Update EDM.SendMail Set Status = 's' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 			}
+            echo $Update_Status;
 			$result_UStatus = mysqli_query($Conn_local,$Update_Status);
 		}
 	}
