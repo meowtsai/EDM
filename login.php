@@ -17,7 +17,7 @@ if ($ip!='203.73.59.138' && $ip!='::1' && $ip!='61.220.44.200' )
 }
 else
 {
-    echo $_SERVER['REMOTE_ADDR'];
+    //echo $_SERVER['REMOTE_ADDR'];
     
 }
 

@@ -1,3 +1,4 @@
+
 <?PHP
 
 error_reporting(-1);
@@ -39,6 +40,25 @@ if ($Action_count > 0){
     <!-- Basic Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+    
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support is under construction-->
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/smartadmin-rtl.min.css">
+
+		<!-- We recommend you use "your_style.css" to override SmartAdmin
+		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/your_style.css"> -->
+
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/your_style.css">
+
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/meow.local/PHP_HTML_Version_v1.8.1/css/demo.min.css">
+
+
 <title>EDM System</title>
 </head>
 
@@ -46,6 +66,108 @@ if ($Action_count > 0){
 <p><img src="img/logo.gif" width="304" height="42" /></p>
 <p><b>EDM System</b></p>
 <p>工作排程</p>
+    
+  <!-- ==========================CONTENT STARTS HERE ========================== -->
+<!-- MAIN PANEL -->
+    
+    <!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+						
+						<!-- NEW WIDGET START -->
+						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							
+							<div class="alert alert-info">
+								<strong>NOTE:</strong> All the data is loaded from a seperate JSON file
+							</div>
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget well" id="wid-id-0">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+									<h2>Widget Title </h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										<input class="form-control" type="text">	
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+										
+										<table id="example" class="display projects-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+									        <thead>
+									            <tr>
+									                <th></th><th>Projects</th><th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> EST</th>
+									                <th>Contacts</th>
+									                <th>Status</th>
+									                <th><i class="fa fa-circle txt-color-darken font-xs"></i> Target/ <i class="fa fa-circle text-danger font-xs"></i> Actual</th>
+									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Starts</th>
+									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Ends</th>
+									                <th>Tracker</th>
+									            </tr>
+									        </thead>
+									    </table>
+
+									</div>
+									<!-- end widget content -->
+									
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+
+						</article>
+						<!-- WIDGET END -->
+						
+					</div>
+
+					<!-- end row -->
+
+					<!-- row -->
+
+					<div class="row">
+
+						<!-- a blank row to get started -->
+						<div class="col-sm-12">
+							<!-- your contents here -->
+						</div>
+							
+					</div>
+
+					<!-- end row -->
+
+				</section>
+				<!-- end widget grid -->
+    
+  
+		
+<!-- END MAIN PANEL -->
+<!-- ==========================CONTENT ENDS HERE ========================== -->  
+    
 <table width="700" border="0">
   <tr>
     <td width="30"><div align="center"></div></td>

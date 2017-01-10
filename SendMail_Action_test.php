@@ -6,7 +6,8 @@ ini_set('display_startup_errors',1);
 //SendMail_Action.php
 date_default_timezone_set('Asia/Taipei');
 include "lib/connect_mysql_local.php";
-require_once("phpmailer/class.phpmailer.php");
+//require_once("phpmailer/class.phpmailer.php");
+require 'phpmailer/PHPMailerAutoload.php';
 ini_set('max_execution_time', 300000);
 ini_set( "memory_limit", "128M" );
 //設定每次發送數量

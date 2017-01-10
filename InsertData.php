@@ -1,4 +1,8 @@
 <?PHP
+
+error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
 //--Kenny 2014.7.16 EDM InsertData
 //--InsertData.php
 date_default_timezone_set('Asia/Taipei');
@@ -36,7 +40,7 @@ if ($ACMNo_Max > 0 && !empty($ACMNo_Max)){
 $InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status,Create_date,html,FormMail,Tital,SendUser,AddFile)values";
 $InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender','".$_POST['AddFile']."')";
 $result = mysqli_query($Conn_local,$InsertData);
-//echo $InsertData;
+echo $InsertData;
 
 $result_cooz = mysqli_query($Conn_local,$sql);
 $i = 0;
@@ -63,7 +67,7 @@ while($row = mysqli_fetch_array($result_cooz)){
 for ($x=0;$x <= 3;$x++){
 	if (!empty($Mail[$x])){
 		$insert_Mail = "insert into sendmail (EMail,Status,tag,ActionNo,UserName,gift_code)values";
-		$insert_Mail .= "('".$Mail[$x]."','a','','$ACMNo','TestMail','TESTGIFTCODEAAAAA')";
+		$insert_Mail .= "('".$Mail[$x]."','a',0,'$ACMNo','TestMail','TESTGIFTCODEAAAAA')";
 		$result = mysqli_query($Conn_local,$insert_Mail);
 		$i++;
 		$j++;
