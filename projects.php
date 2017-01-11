@@ -175,6 +175,7 @@ include("inc/header.php");
 									                
 									                <th>等待發送</th>
                                                     <th>發送失敗</th>
+                                                    <th>開信數</th>
 									                <th><i class="fa fa-circle txt-color-darken font-xs"></i> 總數量/ <i class="fa fa-circle text-danger font-xs"></i> Actual</th>
 									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> 開始時間</th>
 									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Ends</th>
@@ -290,6 +291,7 @@ include("inc/header.php");
 	            { "data": "SuccessMail" },
 	            { "data": "ErrorMail" },
 	            { "data": "WaitMail" },
+                { "data": "OpenedMail" },
 	            { "data": "Status" },
 	            { "data": "Create_date" },
                 

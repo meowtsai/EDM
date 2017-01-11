@@ -174,6 +174,7 @@ if ($Action_count > 0){
     <td width="80"><div align="center"><strong>成功發送</strong></div></td>
     <td width="80"><div align="center"><strong>等待發送</strong></div></td>
     <td width="80"><div align="center"><strong>發送失敗</strong></div></td>
+    <td width="80"><div align="center"><strong>開信數</strong></div></td>
     <td width="80"><div align="center"><strong>總數量</strong></div></td>
     <td width="150"><div align="center"><strong>開始時間</strong></div></td>
     <td width="200"><div align="center"><strong>狀態</strong></div></td>
@@ -198,6 +199,7 @@ if ($Action_count > 0){
     <td><div align="center"><?PHP echo $row['SuccessMail'];?></div></td>
     <td><div align="center"><?PHP echo $row['WaitMail'];?></div></td>
     <td><div align="center"><?PHP echo $row['ErrorMail'];?></div></td>
+    <td><div align="center"><?PHP echo $row['OpenedMail'];?></div></td>
     <td><div align="center"><?PHP echo $total_mail; ?></div></td>
     <td><div align="center"><?PHP echo $row['Create_date'];?></div></td>
     <td><div align="center"><?PHP echo $AStatus; ?></div></td>
@@ -213,6 +215,7 @@ if ($Action_count > 0){
     <td><div align="center">-</div></td>
     <td><div align="center">-</div></td>
     <td><div align="center">-</div></td>
+    <td><div align="center">-</div></td>      
     <td><div align="center">-</div></td>
     <td><div align="center">No Data</div></td>
   </tr>

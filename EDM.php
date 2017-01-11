@@ -554,7 +554,7 @@ $(function(){
 <p>發信者 : 
   <input type="text" name="Sender" id="Sender" value="酷栗遊戲" /></p>
 <p>E-Mail : 
-  <input type="text" name="SenderMail" value="no-reply@edm.cooz.com.tw" id="Sender"  size=30 /></p>
+  <input type="text" name="SenderMail" value="edm@edm.cooz.com.tw" id="Sender"  size=30 /></p>
 <p>標題 : 
   <input type="text" name="Title" id="Title" size=80 /></p>
 <p>內容 :
