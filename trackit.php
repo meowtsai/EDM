@@ -25,7 +25,8 @@ else
     
 }
 
+header("Content-Type: image/jpeg"); // it will return image 
+readfile("img/blank.gif");
 
-header('Content-Type: image');
     
 ?>
