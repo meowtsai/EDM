@@ -12,10 +12,10 @@ include "./lib/connect_mysql_local.php";
 include "login.php";
 if($_SESSION['EDM_User'] == "meow"){
 	$sql_count = "SELECT count(*) FROM EDM.actionmail ";
-	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.actionmail Order by Create_date";
+	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date,OpenedMail  FROM EDM.actionmail Order by Create_date";
 }else{
 	$sql_count = "SELECT count(*) FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."'";
-	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
+	$sql = "SELECT ACMNo,SuccessMail,ErrorMail,WaitMail,Status,Create_date,OpenedMail  FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
 }
 $result = mysqli_query($Conn_local,$sql_count);
 List($Action_count)=mysqli_fetch_row($result);

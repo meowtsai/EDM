@@ -1,5 +1,9 @@
 <?php
 
+include "lib/connect_mysql_local.php";
+include "login.php";
+
+
 //initilize the page
 require_once("inc/init.php");
 
@@ -26,39 +30,19 @@ include("inc/header.php");
 //$page_nav["views"]["sub"]["projects"]["active"] = true;
 //include("inc/nav.php");
 
+//變更寄送狀態
+
+if (!empty($_GET["Action"]) && !empty($_GET["ACMNo"])){
+	$UpdateAction = "Update EDM.actionmail Set Status='".$_GET["Action"]."' where ACMNo='".$_GET["ACMNo"]."' and OwnUser='".$_SESSION['EDM_User']."'";
+	$result_UPA = mysqli_query($Conn_local,$UpdateAction);
+}
+
 ?>
 <!-- ==========================CONTENT STARTS HERE ========================== -->
 		<!-- MAIN PANEL -->
 		<div id="main" role="main">
 
-			<!-- RIBBON -->
-			<div id="ribbon">
-
-				<span class="ribbon-button-alignment"> 
-					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
-						<i class="fa fa-refresh"></i>
-					</span> 
-				</span>
-
-				<!-- breadcrumb -->
-				<ol class="breadcrumb">
-					<li>Home</li><li>Miscellaneous</li><li>Blank Page</li>
-				</ol>
-				<!-- end breadcrumb -->
-
-				<!-- You can also add more buttons to the
-				ribbon for further usability
-
-				Example below:
-
-				<span class="ribbon-button-alignment pull-right">
-				<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-				<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-				<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-				</span> -->
-
-			</div>
-			<!-- END RIBBON -->
+			
 			
 			
 
@@ -74,9 +58,9 @@ include("inc/header.php");
 							
 							<!-- PAGE HEADER -->
 							<i class="fa-fw fa fa-file-text-o"></i> 
-								Projects 
+								EDM工作
 							<span>>  
-								Overview
+								總覽
 							</span>
 						</h1>
 					</div>
@@ -87,24 +71,7 @@ include("inc/header.php");
 					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
 						<!-- sparks -->
 						<ul id="sparks">
-							<li class="sparks-info">
-								<h5> My Income <span class="txt-color-blue">$47,171</span></h5>
-								<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
-									1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
-								</div>
-							</li>
-							<li class="sparks-info">
-								<h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
-								<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-									110,150,300,130,400,240,220,310,220,300, 270, 210
-								</div>
-							</li>
-							<li class="sparks-info">
-								<h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
-								<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-									110,150,300,130,400,240,220,310,220,300, 270, 210
-								</div>
-							</li>
+							
 						</ul>
 						<!-- end sparks -->
 					</div>
@@ -128,9 +95,7 @@ include("inc/header.php");
 						<!-- NEW WIDGET START -->
 						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							
-							<div class="alert alert-info">
-								<strong>NOTE:</strong> All the data is loaded from a seperate JSON file
-							</div>
+							
 
 							<!-- Widget ID (each widget will need unique ID)-->
 							<div class="jarviswidget well" id="wid-id-0">
@@ -171,14 +136,13 @@ include("inc/header.php");
 									            <tr>
 									                <th></th><th>工作編號</th>
                                                     <th>主旨</th>
-                                                    <th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> 成功發送</th>
+                                                    <th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> 發送人員 </th>
 									                
 									                <th>等待發送</th>
                                                     <th>發送失敗</th>
                                                     <th>開信數</th>
-									                <th><i class="fa fa-circle txt-color-darken font-xs"></i> 總數量/ <i class="fa fa-circle text-danger font-xs"></i> Actual</th>
-									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> 開始時間</th>
-									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Ends</th>
+									                <th><i class="fa fa-circle txt-color-darken font-xs"></i> 總數量/ <i class="fa fa-circle text-danger font-xs"></i> 成功發送</th>
+									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> 最後更新時間</th>
 									                <th>狀態</th>
 									            </tr>
 									        </thead>
@@ -204,9 +168,13 @@ include("inc/header.php");
 
 					<div class="row">
 
+                        <div class="alert alert-info">
+								<strong>NOTE:</strong> 工作新增之後會進入排程，每五分鐘發送三百封，發完為止。
+							</div>
 						<!-- a blank row to get started -->
 						<div class="col-sm-12">
-							<!-- your contents here -->
+						<a href="EDM.php" class="btn btn-primary btn-lg">新增EDM發送工作</a>
+
 						</div>
 							
 					</div>
@@ -288,16 +256,18 @@ include("inc/header.php");
 	            },
 	            { "data": "ACMNo" },
                 { "data": "Tital" },
-	            { "data": "SuccessMail" },
+                { "data": "OwnUser" },
 	            { "data": "ErrorMail" },
 	            { "data": "WaitMail" },
                 { "data": "OpenedMail" },
+                { "data": "SuccessMailTotalMail" },
+                { "data": "Create_date" },
 	            { "data": "Status" },
-	            { "data": "Create_date" },
+	            
                 
 	            
 	        ],
-	        "order": [[1, 'asc']],
+	        "order": [[1, 'desc']],
 	        "fnDrawCallback": function( oSettings ) {
 		       runAllCharts()
 		    }
@@ -321,6 +291,17 @@ include("inc/header.php");
 	            tr.addClass('shown');
 	        }
 	    });
+        
+        
+        
+        $( "a[name*='cmdAction']" ).on('click', function() {
+          alert( "Handler for .click() called." );
+        });
+        
+        
+       
+        
+        
 	})
 
 </script>
