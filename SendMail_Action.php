@@ -90,7 +90,13 @@ if ($CheckCount > 0){
 			$mail->AddAddress($User_Email,$user_name);
 			$mail->Subject=$row["Tital"];
             $gift_code="";
+            //加入取消訂閱的連結
             $unsubmessage="<p><a href='http://edm.cooz.com.tw/EDM/cancelsubscribe.php?acmno=$ACMNo&mail=$User_Email'>我不願意再收到活動訊息郵件/ unsubscribe</a></p>";
+            
+            
+            //加入追蹤點擊的連結
+            $trackit="<img src='http://edm.cooz.com.tw/EDM/trackit.php?acmno=$ACMNo&mail=$User_Email'/>";
+            
             $mailBody=$row["html"];
             if (isset($row["gift_code"]))
             {
@@ -100,7 +106,7 @@ if ($CheckCount > 0){
             
             
             
-			$mail->Body=$mailBody.$unsubmessage; 
+			$mail->Body=$mailBody.$unsubmessage.$trackit; 
 			if(!$mail->Send()){
 			//SendMaill Error Update DB
 				$Update_Status = "Update EDM.sendmail Set Status = 'e1', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
