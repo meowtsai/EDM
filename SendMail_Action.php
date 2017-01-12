@@ -109,7 +109,7 @@ if ($CheckCount > 0){
 			$mail->Body=$mailBody.$unsubmessage.$trackit; 
 			if(!$mail->Send()){
 			//SendMaill Error Update DB
-				$Update_Status = "Update EDM.sendmail Set Status = 'e1', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
+				$Update_Status = "Update EDM.sendmail Set Status = 'e3', tag = '0' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
 			}else{
 			//SendMail Success Update DB
 				$Update_Status = "Update EDM.sendmail Set Status = 's' where ActionNO = '".$row["ACMNo"]."' and EMail = '".$row["EMail"]."' and UserName = '".$row["UserName"]."'";
