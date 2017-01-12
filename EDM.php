@@ -159,9 +159,9 @@ include("inc/header.php");
 											</div>
 										</section>
                                         <section>
-											<label class="label">玩家名單搭配虛寶序號EXCEL檔案</label>
+											<label class="label">玩家名單搭配虛寶序號csv檔案</label>
 											<div class="input input-file">
-												<span class="button"><input type="file" id="UploadExcel" name="UploadExcel" onchange="this.parentNode.nextSibling.value = this.value" name="Content_File" id="Content_File">瀏覽</span><input type="text" placeholder="請選取要發送對象Email和虛寶序號的EXCEL檔案" readonly="">
+												<span class="button"><input type="file" id="UploadExcel" name="UploadExcel" onchange="this.parentNode.nextSibling.value = this.value" name="Content_File" id="Content_File">瀏覽</span><input type="text" placeholder="請選取要發送對象Email和虛寶序號的csv檔案" readonly="">
 											</div>
 										</section>
 		
@@ -216,3 +216,67 @@ include("inc/header.php");
 ?>
 
 
+<!-- PAGE RELATED PLUGIN(S) -->
+<script src="<?php echo ASSETS_URL; ?>/js/plugin/jquery-form/jquery-form.min.js"></script>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		
+
+		var $orderForm = $("#form1").validate({
+			// Rules for form validation
+			rules : {
+				Sender : {
+					required : true
+				},
+				SenderMail : {
+					required : true,
+					email : true
+				},
+				Title : {
+					required : true
+				},
+				Content_File : {
+					required : true
+				},
+				UploadExcel : {
+					required : true
+				}
+			},
+
+			// Messages for form validation
+			messages : {
+				Sender : {
+					required : '請輸入寄件者署名,例如xx遊戲'
+				},
+				SenderMail : {
+					required : '請輸入寄件者Mail,例如edm@edm.cooz.com.tw',
+					email : 'Please enter a VALID email address'
+				},
+				Title : {
+					required : '請輸入信件主旨,例如"酷栗會員專屬好康！免費領小李飛刀遊戲金!"'
+				},
+				Content_File : {
+					required : '請選取上傳信件內容html檔案'
+				},
+				UploadExcel : {
+					required : '請選取上傳名單虛寶號csv檔案'
+				}
+			},
+
+			// Do not change code below
+			errorPlacement : function(error, element) {
+				error.insertAfter(element.parent());
+			}
+		});
+
+		
+
+
+
+	})
+
+</script>
