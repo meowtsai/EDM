@@ -3,14 +3,38 @@
 
 include "./lib/connect_mysql_local.php";
 
+
 if (!empty($_GET['mail']) && !empty($_GET['acmno'])){
         
 $_email = $_GET['mail'];
 $_acmno = $_GET['acmno'];
- 
+
+//$_code = $_GET['code'];
+
+    
+$stmt = $Conn_local->prepare('INSERT INTO errormail(EMNo,Email)
+SELECT * FROM (SELECT ActionNo,Email FROM sendmail WHERE Email =  ? AND ActionNo = ?) AS tmp
+WHERE NOT EXISTS (
+    SELECT Email FROM errormail WHERE EMNo = ?
+) LIMIT 1');
+    
+//$stmt = $Conn_local->prepare('insert into errormail(EMNo,Email) values(?,?)');
+$stmt->bind_param('sss', $_email,$_acmno,$_acmno);
+mysqli_stmt_execute($stmt);
+    
+    
+
+/* execute prepared statement */
+
+
+//printf("%d Row inserted.\n", mysqli_stmt_execute($stmt));
+
+//$result = $stmt->get_result();
+    
+    
     //echo $_POST["del"];
-    $sql = "insert into errormail(EMNo,Email) values($_acmno,'$_email')";
-    mysqli_query($Conn_local,$sql);
+    //$sql = "insert into errormail(EMNo,Email) values($_acmno,'$_email')";
+    //mysqli_query($Conn_local,$sql);
  
     
         

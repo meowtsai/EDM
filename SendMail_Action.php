@@ -94,7 +94,7 @@ if ($CheckCount > 0){
             $unsubmessage="<p><a href='http://edm.cooz.com.tw/EDM/cancelsubscribe.php?acmno=$ACMNo&mail=$User_Email'>我不願意再收到活動訊息郵件/ unsubscribe</a></p>";
             
             
-            //加入追蹤點擊的連結
+            //加入追蹤點擊的連結 
             $trackit="<img src='http://edm.cooz.com.tw/EDM/trackit.php?acmno=$ACMNo&mail=$User_Email'/>";
             
             $mailBody=$row["html"];
