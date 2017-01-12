@@ -52,15 +52,15 @@ while($row = mysqli_fetch_assoc($result)) {
             }
             elseif ($row[$var]=='w')
             {
-                $row[$var]="等待中<a href=\"EDM_List.php?Action=s&ACMNo=". $row['ACMNo']."\"  class=\"btn btn-primary btn-sm\">暫停排程</a>";    
+                $row[$var]="等待中 &nbsp;&nbsp;&nbsp;<a href=\"EDM_List.php?Action=s&ACMNo=". $row['ACMNo']."\"  class=\"btn btn-primary btn-sm\">暫停排程</a>";    
             } 
             elseif ($row[$var]=='a')
             {
-                $row[$var]="排程進行中<a href=\"EDM_List.php?Action=s&ACMNo=". $row['ACMNo']."\" class=\"btn btn-primary btn-sm\">暫停排程</a>";    
+                $row[$var]="排程進行中&nbsp;&nbsp;&nbsp;<a href=\"EDM_List.php?Action=s&ACMNo=". $row['ACMNo']."\" class=\"btn btn-primary btn-sm\">暫停排程</a>";    
             } 
             elseif ($row[$var]=='s')
             {
-                $row[$var]="<font color=red>工作暫停中</font> <a  href=\"EDM_List.php?Action=a&ACMNo=". $row['ACMNo']."\"  class=\"btn btn-primary btn-sm\">啓動排程</a>";    
+                $row[$var]="<font color=red>工作暫停中&nbsp;&nbsp;&nbsp;</font> <a  href=\"EDM_List.php?Action=a&ACMNo=". $row['ACMNo']."\"  class=\"btn btn-primary btn-sm\">啓動排程</a>";    
             } 
                 
             
