@@ -140,7 +140,7 @@ if ($CheckCount > 0){
 					$E1_Tot = $row["Scount"];
 				}elseif($row["status"] == "e2"){
 					$E2_Tot = $row["Scount"];
-				}else{
+				}elseif($row["status"] == "e3"){
 					$E3_Tot = $row["Scount"];
 				}
 				$E_Tot = @$E1_Tot + @$E2_Tot + @$E3_Tot;
