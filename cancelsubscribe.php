@@ -11,15 +11,15 @@ $_acmno = $_GET['acmno'];
 
 //$_code = $_GET['code'];
 
-    
+//http://edm.cooz.com.tw/EDM/cancelsubscribe.php?acmno=22&mail=ausaikit1988@yahoo.com.hk    
 $stmt = $Conn_local->prepare('INSERT INTO errormail(EMNo,Email)
 SELECT * FROM (SELECT ActionNo,Email FROM sendmail WHERE Email =  ? AND ActionNo = ?) AS tmp
 WHERE NOT EXISTS (
-    SELECT Email FROM errormail WHERE EMNo = ?
+    SELECT Email FROM errormail WHERE EMNo = ? and Email = ?
 ) LIMIT 1');
     
 //$stmt = $Conn_local->prepare('insert into errormail(EMNo,Email) values(?,?)');
-$stmt->bind_param('sss', $_email,$_acmno,$_acmno);
+$stmt->bind_param('ssss', $_email,$_acmno,$_acmno,$_email);
 mysqli_stmt_execute($stmt);
     
     
