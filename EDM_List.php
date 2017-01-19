@@ -142,6 +142,7 @@ if (!empty($_GET["Action"]) && !empty($_GET["ACMNo"])){
                                                     <th>發送失敗</th>
                                                     <th>開信數</th>
 									                <th><i class="fa fa-circle txt-color-darken font-xs"></i> 總數量/ <i class="fa fa-circle text-danger font-xs"></i> 成功發送</th>
+                                                    <th>取消訂閱</th>
 									                <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> 最後更新時間</th>
 									                <th>狀態</th>
 									            </tr>
@@ -261,6 +262,7 @@ if (!empty($_GET["Action"]) && !empty($_GET["ACMNo"])){
                 { "data": "ErrorMail" },
                 { "data": "OpenedMail" },
                 { "data": "SuccessMailTotalMail" },
+                { "data": "Cancelled" },
                 { "data": "Create_date" },
 	            { "data": "Status" },
 	            

@@ -21,12 +21,13 @@ if($_SESSION['EDM_User'] == "meow"){
     Create_date,
     Tital,
     OpenedMail, 
-    (SuccessMail+ErrorMail+WaitMail) as SuccessMailTotalMail 
+    (SuccessMail+ErrorMail+WaitMail) as SuccessMailTotalMail ,
+    (select count(*) from errormail a where  a.EMno =actionmail.ACMNo) as Cancelled
     FROM EDM.actionmail Order by Create_date";
 }else{
 	$sql_count = "SELECT count(*) FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."'";
 	$sql = "SELECT ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status, 
-    Create_date,Tital,OpenedMail, (SuccessMail+ErrorMail+WaitMail) as SuccessMailTotalMail FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
+    Create_date,Tital,OpenedMail, (SuccessMail+ErrorMail+WaitMail) as SuccessMailTotalMail,(select count(*) from errormail a where  a.EMno =actionmail.ACMNo) as Cancelled FROM EDM.actionmail where OwnUser='".$_SESSION['EDM_User']."' Order by Create_date";
 }
 $result = mysqli_query($Conn_local,$sql_count);
 List($Action_count)=mysqli_fetch_row($result);
