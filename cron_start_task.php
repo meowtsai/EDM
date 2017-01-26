@@ -9,6 +9,6 @@ include "/var/www/html/EDM/lib/connect_mysql_local.php";
 
 if (!empty($_GET["ACMNo"])){
 	$UpdateAction = "Update EDM.actionmail Set Status='a' where ACMNo='".$_GET["ACMNo"]."'";
-    echo $UpdateAction;
-	//$result_UPA = mysqli_query($Conn_local,$UpdateAction);
+    //echo $UpdateAction;
+	$result_UPA = mysqli_query($Conn_local,$UpdateAction);
 }?>
