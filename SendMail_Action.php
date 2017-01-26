@@ -32,14 +32,9 @@ if ($CheckCount > 0){
 	//設定使用SMTP發送
 	$mail->IsSMTP();
 	$mail->SMTPAuth =false;
-	//---coozmail.com.tw
-	//$mail->Host = "smail.longeplay.com.tw";
-    //$mail->Host = "edm.cooz.com.tw";
-    $mail->Host = "edm.cooz.com.tw";
+	$mail->Host = "edm.cooz.com.tw";
     
 	$mail->Port = 25;
-	//$mail->Username = "CoozEDM@edm.cooz.com.tw";  //LongE_SDKSite@smail.longeplay.com.tw", "54700022
-	//$mail->Password = "";
 	$mail->CharSet="utf-8";
 	$mail->Encoding = "base64";
 	$mail->IsHTML(true);
