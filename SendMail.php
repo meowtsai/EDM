@@ -9,7 +9,7 @@ ini_set('display_startup_errors',1);
 include "./lib/connect_mysql_local.php";
 include "login.php";
 
-
+date_default_timezone_set('Asia/Taipei');
 
 //initilize the page
 require_once("inc/init.php");
@@ -31,6 +31,18 @@ $EMail_Command=4;//把其他名單的功能拿掉 只能匯入email + 序號的�
 //$Mail2 = $_POST["Mail2"];
 //$Mail3 = $_POST["Mail3"];
 //自行輸入email收件者的功能先拿掉
+
+if (isset($_POST["start_date"]) && isset($_POST["start_time"]))
+{
+    $sdate=date_create($_POST["start_date"] .$_POST["start_time"] );
+    
+    $sdate= date_format($sdate,"Y-m-d H:i:s");
+}
+else
+{
+    $sdate=date("Y-m-d H:i:s");
+}
+
 
 if ($RadioContent == 1){
 	//內容為檔案
@@ -261,6 +273,9 @@ include("inc/header.php");
 										
 
                                         
+                                        <section>
+                                            <label class="label">開始發送時間 : <strong><?php echo $sdate;?></strong></label>
+										</section>
                                         
 										<section>
                                             <label class="label">發信者 : <strong><?php echo $Sender;?></strong></label>
@@ -292,6 +307,7 @@ include("inc/header.php");
 										
 									</fieldset>                  
                                     
+                                    <input type="hidden" name="start_dt" value="<?php echo $sdate;?>">
                                     <input type="hidden" name="Sender" value="<?php echo $Sender;?>">
                                       <input type="hidden" name="SenderMail" value="<?php echo $SenderMail;?>">
                                       <input type="hidden" name="Title" value="<?php echo $Title;?>">

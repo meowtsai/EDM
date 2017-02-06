@@ -21,7 +21,7 @@ fclose($Sys_log);
 
 //確認是否有未發出的信件
 $sqlMail_Check ="select count(*) from EDM.actionmail A, EDM.sendmail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
-$sqlMail_Check .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) order by A.ACMNo, B.MailNo";
+$sqlMail_Check .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) and A.StartDate<NOW() order by A.ACMNo, B.MailNo";
 $result_check = mysqli_query($Conn_local,$sqlMail_Check);
 List($CheckCount)=mysqli_fetch_row($result_check);
 //echo $sqlMail_Check."<br>";
@@ -42,7 +42,7 @@ if ($CheckCount > 0){
 	
 	$sqlMail ="select A.ACMNo, A.html, A.FormMail, A.Tital, A.SendUser, A.AddFile, B.MailNo, B.EMail, B.UserName, B.Status, B.gift_code "; 
 	$sqlMail .="from EDM.actionmail A, EDM.sendmail B where A.ACMNo = B.ActionNo and B.Status = 'w' "; 
-	$sqlMail .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) order by A.ACMNo, B.MailNo limit 0, $MailLimit";
+	$sqlMail .="and B.tag = '0' and ( A.Status = 'w' or A.Status = 'a' ) and A.StartDate<NOW() order by A.ACMNo, B.MailNo limit 0, $MailLimit";
 	$result_MailList = mysqli_query($Conn_local,$sqlMail);
     //echo $sqlMail."<br>";
 	$ACMNo = "";

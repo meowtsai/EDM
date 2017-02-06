@@ -6,6 +6,7 @@
 include "lib/connect_mysql_local.php";
 include "login.php";
 
+date_default_timezone_set('Asia/Taipei');
 
 //initilize the page
 require_once("inc/init.php");
@@ -35,6 +36,25 @@ include("inc/header.php");
 
 //$sql = "SELECT distinct email_address,SUBSTRING_INDEX(email_address, '@', -1) as Mail,count(*) as TOT  FROM t_user t where email_address <> '' and SUBSTRING_INDEX(email_address, '@', -1) like '%.%' and email_address like '%@%' group by SUBSTRING_INDEX(email_address, '@', -1) Order by TOT Desc limit 0, 30";
 //$result = mysqli_query($Conn_local,$sql);
+
+//echo $_POST["start_date"];
+//echo $_POST["timepicker"];
+
+if (isset($_POST["start_date"]) && isset($_POST["start_time"]))
+{
+    $sdate=date_create($_POST["start_date"] .$_POST["start_time"] );
+    
+    $sdate= date_format($sdate,"Y-m-d H:i:s");
+}
+else
+{
+    $sdate=date("Y-m-d H:i:s");
+}
+echo $sdate;
+//$date=date_create("2013-03-15");
+
+
+
 ?>
 
 <!-- ==========================CONTENT STARTS HERE ========================== -->
@@ -121,7 +141,7 @@ include("inc/header.php");
 							<!-- widget content -->
 							<div class="widget-body no-padding">
 		
-								<form id="form1" name="form1" enctype="multipart/form-data" method="post" action="SendMail.php" class="smart-form">
+								<form id="form1" name="form1" enctype="multipart/form-data" method="post" action="" class="smart-form">
 									<header>
 										輸入以下相關欄位
 									</header>
@@ -140,43 +160,14 @@ include("inc/header.php");
 												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 
 
-                                                <input class="form-control" name="start_time"  id="timepicker" type="text" placeholder="選擇時間">
+                                                <input class="form-control" name="start_time" id="timepicker" type="text" placeholder="選擇時間">
 												<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                                 </div>
 
 											</label>
 										</section>
                                         
-										<section>
-											<label class="label">發信者 : </label>
-											<label class="input">
-                                                <input type="text" name="Sender" id="Sender" value="酷栗遊戲" />												
-											</label>
-										</section>
-                                        <section>
-											<label class="label">發信者E-Mail : </label>
-											<label class="input">
-                                                <input type="text" name="SenderMail" value="edm@edm.cooz.com.tw" id="Sender"  size=30 />						
-											</label>
-										</section>
-                                        <section>
-											<label class="label">信件標題主旨 : </label>
-											<label class="input">
-                                                <input type="text" name="Title" id="Title" size=80 />												
-											</label>
-										</section>
-                                        <section>
-											<label class="label">信件內容HTML檔</label>
-											<div class="input input-file">
-												<span class="button"><input type="file" onchange="this.parentNode.nextSibling.value = this.value" name="Content_File" id="Content_File">瀏覽</span><input type="text" placeholder="請選取信件內容要套用的HTML檔案" readonly="">
-											</div>
-										</section>
-                                        <section>
-											<label class="label">玩家名單搭配虛寶序號csv檔案</label>
-											<div class="input input-file">
-												<span class="button"><input type="file" id="UploadExcel" name="UploadExcel" onchange="this.parentNode.nextSibling.value = this.value" name="Content_File" id="Content_File">瀏覽</span><input type="text" placeholder="請選取要發送對象Email和虛寶序號的csv檔案" readonly="">
-											</div>
-										</section>
+										
 		
 										
 									</fieldset>
@@ -231,7 +222,7 @@ include("inc/header.php");
 
 <!-- PAGE RELATED PLUGIN(S) -->
 <script src="<?php echo ASSETS_URL; ?>/js/plugin/jquery-form/jquery-form.min.js"></script>
-<script src="<?php echo ASSETS_URL; ?>/js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+<script src="http://localhost:8080/meow.local/js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
 
 
 
@@ -244,52 +235,7 @@ include("inc/header.php");
 
 		
 
-		var $orderForm = $("#form1").validate({
-			// Rules for form validation
-			rules : {
-				Sender : {
-					required : true
-				},
-				SenderMail : {
-					required : true,
-					email : true
-				},
-				Title : {
-					required : true
-				},
-				Content_File : {
-					required : true
-				},
-				UploadExcel : {
-					required : true
-				}
-			},
-
-			// Messages for form validation
-			messages : {
-				Sender : {
-					required : '請輸入寄件者署名,例如xx遊戲'
-				},
-				SenderMail : {
-					required : '請輸入寄件者Mail,例如edm@edm.cooz.com.tw',
-					email : 'Please enter a VALID email address'
-				},
-				Title : {
-					required : '請輸入信件主旨,例如"酷栗會員專屬好康！免費領小李飛刀遊戲金!"'
-				},
-				Content_File : {
-					required : '請選取上傳信件內容html檔案'
-				},
-				UploadExcel : {
-					required : '請選取上傳名單虛寶號csv檔案'
-				}
-			},
-
-			// Do not change code below
-			errorPlacement : function(error, element) {
-				error.insertAfter(element.parent());
-			}
-		});
+	
 
 		
 

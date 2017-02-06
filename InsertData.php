@@ -11,6 +11,8 @@ include "./lib/connect_mysql_local.php";
 include "login.php";
 
 $Euser = $_SESSION['EDM_User'];
+
+$start_dt = $_POST["start_dt"];
 $Sender = $_POST["Sender"];
 $SenderMail = $_POST["SenderMail"];
 $Title = $_POST["Title"];
@@ -42,8 +44,8 @@ if ($ACMNo_Max > 0 && !empty($ACMNo_Max)){
 //$InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,Status,Create_date,html,FormMail,Tital,SendUser,AddFile)values";
 //$InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender','".$_POST['AddFile']."')";
 
-$InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,OpenedMail,Status,Create_date,html,FormMail,Tital,SendUser)values";
-$InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender')";
+$InsertData = "insert into EDM.actionmail (ACMNo,OwnUser,SuccessMail,ErrorMail,WaitMail,OpenedMail,Status,Create_date,html,FormMail,Tital,SendUser,StartDate)values";
+$InsertData .= "($ACMNo,'".$_SESSION['EDM_User']."',0,0,0,0,'w',now(),'$Content_Text','$SenderMail','$Title','$Sender','$start_dt')";
 $result = mysqli_query($Conn_local,$InsertData);
 
 //echo $InsertData;
